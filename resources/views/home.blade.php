@@ -1,1 +1,5 @@
-<h1>test</h1>
+@extends('user.layouts.app')
+
+@section('content')
+<x-navbar></x-navbar>
+@endsection
