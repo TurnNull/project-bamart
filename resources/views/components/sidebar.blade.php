@@ -1,4 +1,4 @@
-<div class="w-72 bg-white border-r border-gray-300 p-5 mt-0.5 ml-10 space-y-6">
+<div class="w-80 bg-white border-r border-gray-300 p-5 mt-0.5 lg:pl-10 space-y-6">
     {{-- Jelajahi Produk --}}
     <div>
         <h2 class="font-bold text-gray-900 text-sm mb-2">
