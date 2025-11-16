@@ -1,9 +1,6 @@
 @extends('user.layouts.app')
 
 @section('content')
-    {{-- NAVBAR --}}
-    <x-navbar />
-
     {{-- LAYOUT WRAPPER --}}
     <div class="flex">
 
