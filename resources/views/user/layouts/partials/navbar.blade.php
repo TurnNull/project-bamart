@@ -35,9 +35,9 @@
 
                         <div class="hidden sm:flex border-l h-full pl-10">
                             <a href="#"
-                                class="py-2 px-4 mr-3 border border-[#7D1972] rounded-[10px] hover:bg-[#7D1972] hover:text-white">Masuk</a>
+                                class="py-2 px-4 mr-3 border-2 border-[#7D1972] font-medium text-[#7D1972] rounded-xl hover:underline">Masuk</a>
                             <a href="#"
-                                class="py-2 px-4 border bg-[#7D1972] rounded-[10px] text-white hover:bg-white hover:text-black">Daftar</a>
+                                class="py-2 px-4 border-2 border-[#7D1972] bg-[#7D1972] rounded-xl font-medium text-white hover:underline">Daftar</a>
                         </div>
                     </div>
             </div>
