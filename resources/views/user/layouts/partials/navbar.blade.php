@@ -8,23 +8,34 @@
                 </a>
                 {{-- Search --}}
                 <div class="flex items-center w-full">
-                    <input type="text" placeholder="Cari produk anda..." class="flex-grow px-4 py-3 border border-r-0 rounded-l-[5px] focus:outline-none">
-                    <button class="px-4 py-3 bg-[#ECE5EF] text-black rounded-r-[5px] border-t border-b border-r hover:bg-[#D9D9D9]">
-                        <x-icon name="magnifying-glass" />
-                    </button>
+                    <form class="flex flex-1 mx-6 relative">
+                        <!-- Input -->
+                        <input type="text" placeholder="Cari produk..."
+                            class="w-full border border-gray-300 rounded-full py-2 pl-4 pr-12
+                                    focus:outline-none focus:ring-0">
+                        <button type="submit"
+                            class="absolute right-0 top-1/2 -translate-y-1/2 
+                                    h-full px-4 bg-gray-200 border-l border-gray-300 
+                                    flex items-center justify-center 
+                                    hover:bg-gray-300 rounded-r-full">
+                            <x-icon name="magnifying-glass" />
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            <div class="flex items-center">
-                <a href="#" class="px-4 py-2">
-                    <x-icon name="shopping-cart" />
-                </a>
+                    <div class="flex items-center">
+                        <a href="#" class="px-4 py-2">
+                            <x-icon name="shopping-cart" />
+                        </a>
 
-                <div class="hidden sm:flex border-l h-full pl-10">
-                    <a href="#" class="py-2 px-4 mr-3 border border-[#7D1972] rounded-[10px] hover:bg-[#7D1972] hover:text-white">Masuk</a>
-                    <a href="#" class="py-2 px-4 border bg-[#7D1972] rounded-[10px] text-white hover:bg-white hover:text-black">Daftar</a>
-                </div>
+                        <div class="hidden sm:flex border-l h-full pl-10">
+                            <a href="#"
+                                class="py-2 px-4 mr-3 border-2 border-[#7D1972] font-medium text-[#7D1972] rounded-xl hover:underline">Masuk</a>
+                            <a href="#"
+                                class="py-2 px-4 border-2 border-[#7D1972] bg-[#7D1972] rounded-xl font-medium text-white hover:underline">Daftar</a>
+                        </div>
+                    </div>
             </div>
         </div>
-    </div>
 </nav>
