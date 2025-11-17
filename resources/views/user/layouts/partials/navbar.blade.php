@@ -1,7 +1,7 @@
-<nav class="bg-white top-0 left-0 w-full fixed z-50">
+<nav class="bg-white top-0 left-0 w-full fixed z-50 shadow">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-            <div class="flex w-lg justify-between">
+            <div class="flex w-full justify-between">
                 {{-- Logo --}}
                 <a href="#" class="hidden md:flex mr-5 items-center shrink-0">
                     <img src="img/logo/bamart-logo.svg" alt="logo" class="w-[110px] md:w-[140px] h-auto shrink-0" />
