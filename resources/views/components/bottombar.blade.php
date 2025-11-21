@@ -40,7 +40,7 @@
             <!-- Beli Sekarang -->
             <a href="#"
                class="flex-1 text-center sm:flex-none py-2 px-4 border-2 border-[#7D1972] text-[#7D1972] 
-                      rounded-2xl font-medium hover:bg-[#7D1972] hover:text-white">
+                      rounded-2xl font-medium hover:bg-[#F7F0F6] hover:text-[#5B1154] hover:border-[#5B1154]">
                 Beli Sekarang
             </a>
 
@@ -48,7 +48,7 @@
             <a href="#"
                class="flex-1 text-center sm:flex-none py-2 px-4 border-2 border-[#7D1972] 
                       text-white bg-[#7D1972] rounded-2xl font-medium 
-                      hover:bg-white hover:text-[#7D1972]">
+                      hover:bg-[#9E1E93] hover:border-[#9E1E93]">
                 Tambah Ke Cart
             </a>
 
