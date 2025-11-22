@@ -124,4 +124,4 @@
 </div>
 @endsection
 
-{{-- @include('user.components.checkoutbar') --}}
+@include('user.components.checkoutbar')
