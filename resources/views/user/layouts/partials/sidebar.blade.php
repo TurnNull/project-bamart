@@ -136,7 +136,6 @@
             {{-- Kategori --}}
             <div>
                 <h3 class="font-bold text-gray-900 mb-2 text-sm">Kategori UMKM</h3>
-        
                 <a href="#" class="block text-sm hover:underline">Sasirangan</a>
                 <a href="#" class="block text-sm hover:underline">Kosmetik Alami</a>
                 <a href="#" class="block text-sm hover:underline">Makanan & Minuman</a>

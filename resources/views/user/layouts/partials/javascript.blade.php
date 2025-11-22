@@ -5,7 +5,9 @@
         list.classList.toggle('hidden');
         icon.classList.toggle('rotate-180');
     }
+</script>
 
+<script>
     function updateSlider() {
         const minRange = document.getElementById("minRange");
         const maxRange = document.getElementById("maxRange");
@@ -44,4 +46,35 @@
 
     // Initialize on load
     updateSlider();
+</script>
+
+<script>
+    // Produk Serupa
+    const slider = document.getElementById('slider');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+
+    const scrollAmount = 230; // geser pas satu card
+
+    btnRight.addEventListener('click', () => {
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    btnLeft.addEventListener('click', () => {
+        slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+</script>
+
+<script>
+    let qty = 1;
+    const harga = 200000000;
+
+    function updateQty(val) {
+        qty += val;
+        if (qty < 1) qty = 1;
+
+        document.getElementById('qty').innerText = qty;
+        document.getElementById('totalHarga').innerText =
+            'Rp' + (qty * harga).toLocaleString('id-ID');
+    }
 </script>

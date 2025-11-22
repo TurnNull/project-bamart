@@ -1,14 +1,14 @@
 <nav class="bg-white top-0 left-0 w-full fixed z-50">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-            <div class="flex w-lg justify-between">
+            <div class="flex w-full justify-between">
                 {{-- Logo --}}
                 <a href="#" class="hidden md:flex mr-5 items-center shrink-0">
                     <img src="img/logo/bamart-logo.svg" alt="logo" class="w-[110px] md:w-[140px] h-auto shrink-0" />
                 </a>
                 {{-- Search --}}
                 <div class="flex items-center w-full">
-                    <form class="flex flex-1 mx-6 relative">
+                    <form class="flex flex-1  relative">
                         <!-- Input -->
                         <input type="text" placeholder="Cari produk..."
                             class="w-full border border-gray-300 rounded-full py-2 pl-4 pr-12

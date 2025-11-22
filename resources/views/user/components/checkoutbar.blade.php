@@ -1,6 +1,5 @@
 <!-- Bottom Bar -->
 <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 px-4 py-3 z-50">
-
     <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <!-- Kiri: Gambar + Nama Barang -->
         <div class="flex items-center gap-3 min-w-0">
@@ -62,18 +61,3 @@
 
     </div>
 </div>
-
-
-<script>
-    let qty = 1;
-    const harga = 200000000;
-
-    function updateQty(val) {
-        qty += val;
-        if (qty < 1) qty = 1;
-
-        document.getElementById('qty').innerText = qty;
-        document.getElementById('totalHarga').innerText =
-            'Rp' + (qty * harga).toLocaleString('id-ID');
-    }
-</script>

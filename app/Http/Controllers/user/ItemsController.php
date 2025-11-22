@@ -37,7 +37,7 @@ class ItemsController extends Controller
      */
     public function show(Items $items)
     {
-        //
+        // return view("user.pages.items.show");
     }
 
     /**
