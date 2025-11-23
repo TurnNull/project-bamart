@@ -28,13 +28,38 @@
                         <a href="#" class="px-4 py-2">
                             <x-icon name="shopping-cart" />
                         </a>
+                        @auth
+                            <div class="relative">
+                                <button class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300 peer">
+                                    <img src="https://ui-avatars.com/api/?background=random" alt="Profile" class="w-full h-full object-cover">
+                                </button>
 
-                        <div class="hidden sm:flex border-l h-full pl-10">
-                            <a href="#"
-                                class="py-2 px-4 mr-3 border-2 border-[#7D1972] font-medium text-[#7D1972] rounded-xl hover:bg-[#F7F0F6] hover:text-[#5B1154] hover:border-[#5B1154]">Masuk</a>
-                            <a href="#"
-                                class="py-2 px-4 border-2 border-[#7D1972] bg-[#7D1972] rounded-xl font-medium text-white hover:bg-[#9E1E93] hover:border-[#9E1E93]">Daftar</a>
-                        </div>
+                                <!-- Dropdown -->
+                                <div class="absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-md opacity-0 pointer-events-none peer-focus:opacity-100 peer-focus:pointer-events-auto transition">
+                                    <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100">
+                                        Profile
+                                    </a>
+
+                                    <form method="" action="">
+                                        @csrf
+                                        <button type="submit"
+                                            class="w-full text-left px-4 py-2 hover:bg-gray-100">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endauth
+
+                        @guest
+                            <div class="hidden sm:flex border-l h-full pl-10">
+                                <a href="#"
+                                    class="py-2 px-4 mr-3 border-2 border-[#7D1972] font-medium text-[#7D1972] rounded-xl hover:bg-[#F7F0F6] hover:text-[#5B1154] hover:border-[#5B1154]">Masuk</a>
+                                <a href="#"
+                                    class="py-2 px-4 border-2 border-[#7D1972] bg-[#7D1972] rounded-xl font-medium text-white hover:bg-[#9E1E93] hover:border-[#9E1E93]">Daftar</a>
+                            </div>
+                        @endguest
                     </div>
             </div>
         </div>
