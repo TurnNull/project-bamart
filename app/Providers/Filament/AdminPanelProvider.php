@@ -32,8 +32,12 @@ class AdminPanelProvider extends PanelProvider
             ->login(LoginCustom::class)
             ->registration(RegisterCustom::class)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#7D1972',
             ])
+            ->favicon(asset('img/logo/bamart-logo.svg'))
+            ->brandName('Bamart')
+            ->brandLogo(asset('img/logo/bamart-logo.svg'))
+            ->brandLogoHeight('35')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([

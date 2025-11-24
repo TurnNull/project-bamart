@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html>
-    {{-- header-start --}}
-    @include('user.layouts.partials.header')
-    {{-- header-end --}}
 
-<body>
+{{-- header-start --}}
+@include('user.layouts.partials.header')
+{{-- header-end --}}
+
+<body class="min-h-screen flex flex-col">  <!-- PENTING -->
 
     {{-- navbar-start --}}
     @include('user.layouts.partials.navbar')
     {{-- navbar-end --}}
 
-    <div class="w-full flex mt-20">
+    {{-- MAIN WRAPPER (flex-1 = dorong footer ke bawah) --}}
+    <div class="flex-1 flex mt-20">
 
         {{-- === SIDEBAR (Conditional) === --}}
         @hasSection('no-sidebar-content')
-            {{-- kosong = sidebar tidak tampil --}}
+            {{-- sidebar mati --}}
         @else
             @include('user.layouts.partials.sidebar')
         @endif
 
-        {{-- === CONTENT ALWAYS SHOWS === --}}
-        <div class="flex-1">
+        {{-- === CONTENT === --}}
+        <div class="flex-1 md:ml-80">
             @yield('content')
         </div>
 
     </div>
 
-    {{-- javascript-start --}}
+    {{-- FOOTER
+    @include('user.layouts.partials.footer') --}}
+
+    {{-- javascript --}}
     @include('user.layouts.partials.javascript')
-    {{-- javascript-end --}}
+
 </body>
 
 </html>
