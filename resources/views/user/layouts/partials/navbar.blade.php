@@ -25,7 +25,7 @@
             </div>
 
                     <div class="flex items-center">
-                        <a href="#" class="px-4 py-2">
+                        <a href="/order/cart" class="px-4 py-2">
                             <x-icon name="shopping-cart" />
                         </a>
                         @auth
@@ -54,9 +54,9 @@
 
                         @guest
                             <div class="hidden sm:flex border-l h-full pl-10">
-                                <a href="#"
+                                <a href="admin/login"
                                     class="py-2 px-4 mr-3 border-2 border-[#7D1972] font-medium text-[#7D1972] rounded-xl hover:bg-[#F7F0F6] hover:text-[#5B1154] hover:border-[#5B1154]">Masuk</a>
-                                <a href="#"
+                                <a href="admin/register"
                                     class="py-2 px-4 border-2 border-[#7D1972] bg-[#7D1972] rounded-xl font-medium text-white hover:bg-[#9E1E93] hover:border-[#9E1E93]">Daftar</a>
                             </div>
                         @endguest

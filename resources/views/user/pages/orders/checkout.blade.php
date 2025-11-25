@@ -1,6 +1,4 @@
-@extends('user.layouts.app')
-
-@section('no-sidebar-content', true)
+@extends('user.layouts.orders')
 
 @section('title')
     <title>Bamart</title>
@@ -8,7 +6,7 @@
 
 @section('content')
     <section class="bg-white py-6 antialiased dark:bg-gray-900">
-        <form action="#" class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <form action="/order/payment" class="mx-auto max-w-screen-xl px-4 2xl:px-0">
 
             <!-- BREADCRUMB -->
             <ol
@@ -46,7 +44,7 @@
                         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    Order summary
+                    Payment
                 </li>
             </ol>
 
@@ -354,27 +352,6 @@
                         </div>
                     </div>
 
-                    <!-- VOUCHER -->
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                            Enter gift card, voucher, or promo code
-                        </label>
-
-                        <div class="flex max-w-md items-center gap-4">
-                            <input
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm 
-                                        text-gray-900 focus:border-[#7D1972] focus:ring-[#7D1972] dark:border-gray-600 
-                                        dark:bg-gray-700 dark:text-white"
-                                placeholder="" required>
-
-                            <button
-                                class="flex items-center justify-center rounded-lg bg-[#7D1972] px-5 py-2.5 text-sm 
-                                        font-medium text-white hover:bg-[#9E1E93] focus:outline-none focus:ring-4 focus:ring-[#7D1972]/30">
-                                Apply
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!-- SUMMARY SIDEBAR -->
@@ -413,14 +390,13 @@
                     <!-- PROCEED BUTTON -->
                     <div class="space-y-3">
                         <button
-                            class="flex w-full items-center justify-center rounded-lg bg-[#7D1972] px-5 py-2.5 text-sm 
-                                    font-medium text-white hover:bg-[#9E1E93] focus:outline-none focus:ring-4 focus:ring-[#7D1972]/30">
+                            class="flex w-full items-center justify-center rounded-lg bg-[#7D1972] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#7D1972] focus:outline-none focus:ring-4 focus:ring-[#7D1972]/30 dark:bg-[#7D1972] dark:hover:bg-[#7D1972] dark:focus:ring-[#7D1972]/30 hover:bg-[#9E1E93]">
                             Proceed to Payment
                         </button>
 
                         <p class="text-sm font-normal text-gray-500 dark:text-gray-400">
                             One or more items require an account.
-                            <a href="#" class="font-medium text-[#7D1972] underline hover:no-underline">Sign in or
+                            <a href="/admin/login" class="font-medium text-[#7D1972] underline hover:no-underline">Sign in or
                                 create an account now.</a>
                         </p>
                     </div>
