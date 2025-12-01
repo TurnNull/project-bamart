@@ -2,20 +2,25 @@
     <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
         <!-- Image (fixed height) -->
         <div class="h-48 w-full bg-gray-200 rounded-md flex items-center justify-center">
-            <img src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                class="h-full object-contain" alt="Product Image">
+            @if (!$item->img_url)
+                <img src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
+                    class="h-full object-cover" alt="{{ $item->img_url }}">
+                @else
+                    <img src="{{ asset('storage/'.$item->img_url) }}"
+                        class="h-full object-cover" alt="{{ $item->img_url }}">
+            @endif
         </div>
     
         <!-- Badge -->
         <div class="mt-4">
             <span class="inline-block rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-                Up to 35% off
+                Potongan harga 35%
             </span>
         </div>
     
         <!-- Title -->
         <h3 class="mt-3 text-base font-semibold text-gray-900 line-clamp-2">
-            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
+            {{ $item->nama }}
         </h3>
     
         <!-- Rating -->
@@ -38,11 +43,11 @@
     
         <!-- Price & Button (fixed layout) -->
         <div class="mt-5 hidden lg:flex items-center justify-between">
-            <p class="text-2xl font-bold text-gray-900 whitespace-nowrap">Rp10.000</p>
+            <p class="text-2xl font-bold text-gray-900 whitespace-nowrap">Rp{{ number_format($item->harga)  }}</p>
     
-            <button class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700">
-                Add to cart
-            </button>
+            <a href="#" class="px-4 py-2">
+                <x-icon name="shopping-bag" />
+            </a>
         </div>
     </div>
 </div>

@@ -22,7 +22,7 @@
         @endif
 
         {{-- === CONTENT === --}}
-        <div class="flex-1 md:ml-80">
+        <div class="container">
             @yield('content')
         </div>
 
@@ -35,5 +35,4 @@
     @include('user.layouts.partials.javascript')
 
 </body>
-
 </html>

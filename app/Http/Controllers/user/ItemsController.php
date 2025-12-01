@@ -11,10 +11,10 @@ class ItemsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Items $items)
     {   
         return view('user.pages.items.index', [
-        //
+            'items' => $items->latest()->paginate(10)
         ]);
     }
 
