@@ -7,11 +7,19 @@
 
         <!-- Kiri: Gambar + Nama Barang -->
         <div class="flex items-center gap-3 min-w-0 shrink sm:hidden md:flex">
-            <div class="w-12 h-12 bg-gray-300 rounded-md shrink-0"></div>
+            <div class="w-12 h-12 bg-gray-300 rounded-md shrink-0">
+                @if (!$item->img_url)
+                    <img src="{{ asset('img/background/missing-image.jpg') }}"
+                        class="h-full object-fit" alt="{{ $item->img_url }}">
+                @else
+                    <img src="{{ asset('storage/'.$item->img_url) }}"
+                        class="h-full object-fit" alt="{{ $item->img_url }}">
+                @endif
+            </div>
 
             <div class="text-sm text-black leading-tight truncate 
                         max-w-[140px] sm:max-w-[200px]">
-                Nama Barang Yang Panjang Sangat Barang [K-007]
+                {{ $item->nama }}
             </div>
         </div>
 
@@ -29,7 +37,7 @@
             <div class="flex flex-col text-right leading-tight">
                 <span class="text-xs text-gray-700">Total Harga</span>
                 <span id="totalHarga" class="text-lg sm:text-xl font-semibold text-fuchsia-900">
-                    Rp200.000.000
+                    Rp{{ number_format($item->harga, 0 , ',', '.') }}
                 </span>
             </div>
         </div>
@@ -62,8 +70,21 @@
                              6.86-8.55 11.54L12 21.35z" />
                 </svg>
             </button>
-
         </div>
-
     </div>
 </div>
+
+@section('checkout-product')
+<script>
+    let qty = 1;
+    const harga = {{ $item->harga }};
+    function updateQty(val) {
+        qty += val;
+        if (qty < 1) qty = 1;
+
+        document.getElementById('qty').innerText = qty;
+        document.getElementById('totalHarga').innerText =
+            'Rp' + (qty * harga).toLocaleString('id-ID');
+    }
+</script>
+@endsection

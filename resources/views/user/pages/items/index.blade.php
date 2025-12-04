@@ -8,35 +8,36 @@
 
 @section('content')
     {{-- CONTAINER HALAMAN --}}
-<div class="w-full max-w-[1400px] mx-auto px-4 md:px-8 py-6">
-
-    {{-- GRID UTAMA --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
+<div class="w-full px-5 sm:px-10 pt-6 pb-50 sm:pb-20">
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
         {{-- === GALERI FOTO === --}}
-        <div class="flex gap-4 md:col-span-1 lg:col-span-1">
-
+        <div class="flex justify-center gap-4">
             {{-- Thumbnail --}}
-            <div class="hidden sm:flex flex-col gap-3">
-                @foreach (range(1, 5) as $i)
+            <div class="hidden sm:flex flex-col gap-4">
+                @foreach (range(1, 4) as $i)
                     <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gray-300 rounded-md"></div>
                 @endforeach
             </div>
 
             {{-- Foto Utama --}}
-            <div class="flex-1">
-                <div class="w-full h-[260px] sm:h-[320px] md:h-[380px] lg:h-[420px] bg-gray-300 rounded-xl"></div>
+            <div class="h-[260px] sm:h-[320px] md:h-[360px] lg:h-[400px] bg-gray-300 rounded-xl">
+                @if (!$item->img_url)
+                    <img src="{{ asset('img/background/missing-image.jpg') }}"
+                        class="h-full object-fit" alt="{{ $item->img_url }}">
+                @else
+                    <img src="{{ asset('storage/'.$item->img_url) }}"
+                        class="h-full object-fit" alt="{{ $item->img_url }}">
+                @endif
             </div>
         </div>
 
         {{-- === DETAIL PRODUK === --}}
-        <div class="w-full md:col-span-1 lg:col-span-1">
-
+        <div class="w-full">
             <h2 class="text-[#7D1972] font-bold text-2xl sm:text-3xl mb-2">
-                Rp 200.000.000
+                Rp{{ number_format($item->harga, 0 , ',', '.') }}
             </h2>
 
-            <h1 class="text-lg sm:text-xl font-semibold">Nama Barang</h1>
+            <h1 class="text-lg sm:text-xl font-semibold">{{ $item->nama }}</h1>
 
             <div class="flex items-center gap-2 text-sm mt-1">
                 <span class="text-yellow-500">★ ★ ★ ★ ★</span>
@@ -49,14 +50,14 @@
                 <p class="text-gray-700 mb-4">Tipe A</p>
                 <p class="font-semibold">Deskripsi:</p>
                 <p class="text-gray-600 leading-relaxed text-sm">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {{ $item->deskripsi }}
                 </p>
             </div>
         </div>
 
         {{-- === TOKO === --}}
-        <div class="lg:col-span-1 md:col-span-2 lg:md:col-span-1 max-w-full md:max-w-md lg:max-w-sm 
-                    border rounded-xl p-5 shadow-sm h-fit mx-auto lg:mx-0">
+        <div class="w-full lg:col-span-1 md:col-span-2 
+                border rounded-xl p-5 shadow-sm h-fit mx-auto lg:mx-0">
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 rounded-full bg-gray-200"></div>
                 <div>

@@ -41,13 +41,3 @@ function updateSlider() {
         " – Rp" + maxVal.toLocaleString("id-ID") + "+";
 }
 updateSlider();
-
-function updateQty(val) {
-    qty += val;
-    if (qty < 1) qty = 1;
-
-    document.getElementById('qty').innerText = qty;
-    document.getElementById('totalHarga').innerText =
-        'Rp' + (qty * harga).toLocaleString('id-ID');
-}
-

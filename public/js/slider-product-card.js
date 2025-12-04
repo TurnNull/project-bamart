@@ -12,6 +12,3 @@ btnRight.addEventListener('click', () => {
 btnLeft.addEventListener('click', () => {
     slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
 });
-
-let qty = 1;
-const harga = 200000000;

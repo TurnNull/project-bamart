@@ -2,13 +2,18 @@
 
 namespace App\Filament\Resources\Items\Schemas;
 
+use App\Models\Items;
+use Cron\DayOfWeekField;
 use Filament\Support\RawJs;
+use Illuminate\Support\Str;
 use Filament\Schemas\Schema;
 use GuzzleHttp\Psr7\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Textarea;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
-use Illuminate\Support\Facades\Auth;
+use Filament\Schemas\Components\Utilities\Set;
 
 class ItemsForm
 {
@@ -17,7 +22,15 @@ class ItemsForm
         return $schema
             ->components([
                 TextInput::make('nama')
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug(($state ?? '') . '-' . time())))
                     ->required(),
+                TextInput::make('slug')
+                    ->label('Slug')
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->disabled()
+                    ->dehydrated(),
                 Textarea::make('deskripsi')
                     ->required()
                     ->rows(3),
@@ -33,7 +46,14 @@ class ItemsForm
                 FileUpload::make('img_url')
                     ->label("Gambar Item")
                     ->image()
-                    ->imageEditor(),
-                ]);
+                    ->maxSize(3072)
+                    ->imageEditor()
+                    // ->directory("")
+                    ->before(function (Items $items) {
+                        if ($items->img_url) {
+                            Storage::disk('public')->delete($items->img_url);
+                        }
+                    }),
+            ]);
     }
 }

@@ -3,8 +3,8 @@
         <div class="flex items-center justify-between">
             <div class="flex w-full justify-between">
                 {{-- Logo --}}
-                <a href="#" class="hidden md:flex mr-5 items-center shrink-0">
-                    <img src="img/logo/bamart-logo.svg" alt="logo" class="w-[110px] md:w-[140px] h-auto shrink-0" />
+                <a href="{{ route('home-page') }}" class="hidden md:flex mr-5 items-center shrink-0">
+                    <img src="{{ asset('img/logo/bamart-logo.svg') }}" alt="logo" class="w-[110px] md:w-[140px] h-auto shrink-0" />
                 </a>
                 {{-- Search --}}
                 <div class="flex items-center w-full">
@@ -41,7 +41,7 @@
                                         Profile
                                     </a>
 
-                                    <form method="" action="">
+                                    <form id="logout-form" method="POST" action="">
                                         @csrf
                                         <button type="submit"
                                             class="w-full text-left px-4 py-2 hover:bg-gray-100">
@@ -54,7 +54,7 @@
 
                         @guest
                             <div class="hidden sm:flex border-l h-full pl-10">
-                                <a href="admin/login"
+                                <a href="#"
                                     class="py-2 px-4 mr-3 border-2 border-[#7D1972] font-medium text-[#7D1972] rounded-xl hover:bg-[#F7F0F6] hover:text-[#5B1154] hover:border-[#5B1154]">Masuk</a>
                                 <a href="admin/register"
                                     class="py-2 px-4 border-2 border-[#7D1972] bg-[#7D1972] rounded-xl font-medium text-white hover:bg-[#9E1E93] hover:border-[#9E1E93]">Daftar</a>

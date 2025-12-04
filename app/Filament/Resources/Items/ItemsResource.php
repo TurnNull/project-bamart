@@ -20,7 +20,9 @@ class ItemsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Items';
+    protected static ?string $recordTitleAttribute = 'nama';
+
+    protected static ?string $recordRouteKeyName = 'slug';
 
     public static function form(Schema $schema): Schema
     {
@@ -44,7 +46,7 @@ class ItemsResource extends Resource
         return [
             'index' => ListItems::route('/'),
             'create' => CreateItems::route('/create'),
-            'edit' => EditItems::route('/{record}/edit'),
+            'edit' => EditItems::route('/{record:slug}/edit'),
         ];
     }
 }

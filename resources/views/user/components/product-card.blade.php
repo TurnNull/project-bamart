@@ -1,16 +1,17 @@
 <div class="card lg:w-[270px] w-[220px]">
     <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
         <!-- Image (fixed height) -->
-        <div class="h-48 w-full bg-gray-200 rounded-md flex items-center justify-center">
-            @if (!$item->img_url)
-                <img src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                    class="h-full object-cover" alt="{{ $item->img_url }}">
-                @else
-                    <img src="{{ asset('storage/'.$item->img_url) }}"
-                        class="h-full object-cover" alt="{{ $item->img_url }}">
-            @endif
-        </div>
-    
+        <a href="{{ route('user.items.show', $item->slug) }}">
+            <div class="h-48 w-full bg-gray-200 rounded-md flex items-center justify-center">
+                @if (!$item->img_url)
+                    <img src="{{ asset('img/background/missing-image.jpg') }}"
+                        class="h-full object-fit" alt="{{ $item->img_url }}">
+                    @else
+                        <img src="{{ asset('storage/'.$item->img_url) }}"
+                            class="h-full object-cover" alt="{{ $item->img_url }}">
+                @endif
+            </div>
+        </a>
         <!-- Badge -->
         <div class="mt-4">
             <span class="inline-block rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
@@ -19,10 +20,11 @@
         </div>
     
         <!-- Title -->
-        <h3 class="mt-3 text-base font-semibold text-gray-900 line-clamp-2">
-            {{ $item->nama }}
-        </h3>
-    
+        <a href="{{ route('user.items.show', $item->slug) }}">
+            <h3 class="mt-3 text-base font-semibold text-gray-900 line-clamp-2">
+                {{ $item->nama }}
+            </h3>
+        <a/>
         <!-- Rating -->
         <div class="mt-2 flex items-center gap-2">
             <div class="flex items-center text-yellow-400">
@@ -43,9 +45,9 @@
     
         <!-- Price & Button (fixed layout) -->
         <div class="mt-5 hidden lg:flex items-center justify-between">
-            <p class="text-2xl font-bold text-gray-900 whitespace-nowrap">Rp{{ number_format($item->harga)  }}</p>
+            <p class="text-  font-bold text-gray-900 whitespace-nowrap">Rp{{ number_format($item->harga, 0, ',', '.')  }}</p>
     
-            <a href="#" class="px-4 py-2">
+            <a href="{{ route('user.items.show', $item->slug) }}" class="px-4 py-2">
                 <x-icon name="shopping-bag" />
             </a>
         </div>
