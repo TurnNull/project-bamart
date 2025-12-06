@@ -53,12 +53,12 @@
             </a>
 
             <!-- Tambah ke Cart -->
-            <a href="#"
+            <button wire:click="addToCart({{ $item->slug }})" 
                class="flex-1 text-center sm:flex-none py-2 px-4 border-2 border-[#7D1972] 
                       text-white bg-[#7D1972] rounded-2xl font-medium 
                       hover:bg-[#9E1E93] hover:border-[#9E1E93]">
                 Tambah Ke Cart
-            </a>
+            </button>
 
             <!-- Favorite -->
             <button class="w-12 h-12 flex items-center justify-center rounded-full shadow bg-white">

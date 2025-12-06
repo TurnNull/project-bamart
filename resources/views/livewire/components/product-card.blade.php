@@ -1,12 +1,12 @@
 <div class="card lg:w-[270px] w-[220px]">
     <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
         <!-- Image (fixed height) -->
-        <a href="{{ route('user.items.show', $item->slug) }}">
+        <a href="#">
             <div class="h-48 w-full bg-gray-200 rounded-md flex items-center justify-center">
                 @if (!$item->img_url)
                     <img src="{{ asset('img/background/missing-image.jpg') }}"
                         class="h-full object-fit" alt="{{ $item->img_url }}">
-                    @else
+                @else
                         <img src="{{ asset('storage/'.$item->img_url) }}"
                             class="h-full object-cover" alt="{{ $item->img_url }}">
                 @endif
@@ -20,7 +20,7 @@
         </div>
     
         <!-- Title -->
-        <a href="{{ route('user.items.show', $item->slug) }}">
+        <a href="#">
             <h3 class="mt-3 text-base font-semibold text-gray-900 line-clamp-2">
                 {{ $item->nama }}
             </h3>
@@ -46,10 +46,10 @@
         <!-- Price & Button (fixed layout) -->
         <div class="mt-5 hidden lg:flex items-center justify-between">
             <p class="text-  font-bold text-gray-900 whitespace-nowrap">Rp{{ number_format($item->harga, 0, ',', '.')  }}</p>
-    
-            <a href="{{ route('user.items.show', $item->slug) }}" class="px-4 py-2">
+            <a wire:click="addToCart('{{ $item->slug }}')" class="px-4 py-2 cursor-pointer">
                 <x-icon name="shopping-bag" />
             </a>
         </div>
     </div>
 </div>
+

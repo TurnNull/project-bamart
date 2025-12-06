@@ -16,8 +16,4 @@ class Items extends Model
             $model->user_id = Auth::user()->id;
         });
     }
-
-    // public function getRouteKeyName() {
-    //     return 'slug';
-    // }
 }

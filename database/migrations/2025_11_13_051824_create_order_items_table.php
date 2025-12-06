@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('order_item_id');
             $table->foreignId('order_id');
             $table->foreignId('item_id');
-            $table->integer('quantity');
-            $table->decimal('subtotal');
+            $table->smallInteger('quantity');
+            $table->decimal('subtotal', 10,2);
             $table->timestamps();
         });
     }

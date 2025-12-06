@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Items\Schemas;
 
+use Carbon\Carbon;
 use App\Models\Items;
 use Cron\DayOfWeekField;
 use Filament\Support\RawJs;
@@ -23,7 +24,7 @@ class ItemsForm
             ->components([
                 TextInput::make('nama')
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug(($state ?? '') . '-' . time())))
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug(($state ?? '') . '-' . Carbon::now()->format('d:s'))))
                     ->required(),
                 TextInput::make('slug')
                     ->label('Slug')

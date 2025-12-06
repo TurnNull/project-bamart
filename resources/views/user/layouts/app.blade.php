@@ -23,7 +23,7 @@
 
         {{-- === CONTENT === --}}
         @yield('content')
-
+        {{ $slot ?? '' }}
     </div>
 
     {{-- FOOTER

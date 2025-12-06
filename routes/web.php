@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\HomePageController;
+// use App\Http\Controllers\HomePageController;
+use App\Livewire\HomeComponent;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomePageController::class, 'index'])->name('home-page');
+Route::get('/', HomeComponent::class)->name('home-page');
 
 Route::get('/item', function () {
     return view('user.pages.items.index');

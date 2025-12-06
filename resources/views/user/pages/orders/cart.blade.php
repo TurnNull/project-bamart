@@ -6,7 +6,6 @@
 
 @section('content')
     <section class="bg-white py-6 antialiased dark:bg-gray-900">
-
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
             <!-- BREADCRUMB -->
             <ol
@@ -21,10 +20,9 @@
                             <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        Cart
+                        Keranjang
                     </span>
                 </li>
-
                 <!-- STEP 2 -->
                 <li
                     class="flex items-center after:hidden after:mx-6 after:h-1 after:w-full after:border-b after:border-gray-200 dark:after:border-gray-700 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
@@ -34,7 +32,7 @@
                             <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        Checkout
+                        Proses Pembayaran
                     </span>
                 </li>
 
@@ -44,27 +42,34 @@
                         <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    Payment
+                    Pembayaran
                 </li>
             </ol>
             
 
             <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
-                
                 <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
-                    
                     <div class="space-y-6">
-                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Shopping Cart</h2>
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Keranjang Belanja</h2>
                         <div
                             class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-                            <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+                            <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0" data-cart-item>
                                 <a href="#" class="shrink-0 md:order-1">
+                                @if (!$item->img_url)
                                     <img class="h-20 w-20 dark:hidden"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                                        alt="imac image" />
+                                        src="{{ asset('img/background/missing-image.jpg') }}"
+                                        alt="{{ "image-missing.jpg" }}" />
                                     <img class="hidden h-20 w-20 dark:block"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
-                                        alt="imac image" />
+                                        src="{{ asset('img/background/missing-image.jpg') }}"
+                                        alt="{{ "image-missing.jpg" }}" />
+                                @else
+                                    <img class="h-20 w-20 dark:hidden"
+                                        src="{{ asset('storage/'.$item->img_url) }}"
+                                        alt="{{ $item->img_url }}" />
+                                    <img class="hidden h-20 w-20 dark:block"
+                                        src="{{ asset('storage/'.$item->img_url) }}"
+                                        alt="{{ $item->img_url }}" />
+                                @endif
                                 </a>
 
                                 <label for="counter-input" class="sr-only">Choose quantity:</label>
@@ -81,7 +86,7 @@
                                         </button>
                                         <input type="text" id="counter-input" data-input-counter
                                             class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
-                                            placeholder="" value="2" required />
+                                            placeholder="" value="1" required />
                                         <button type="button" id="increment-button"
                                             data-input-counter-increment="counter-input"
                                             class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
@@ -93,15 +98,13 @@
                                         </button>
                                     </div>
                                     <div class="text-end md:order-4 md:w-32">
-                                        <p class="text-base font-bold text-gray-900 dark:text-white">$1,499</p>
+                                        <p class="text-base font-bold text-gray-900 dark:text-white" data-price-el data-unit-price="{{ $item->harga }}">Rp {{ number_format($item->harga, 0 , ',', '.') }}</p>
                                     </div>
                                 </div>
 
                                 <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                     <a href="#"
-                                        class="text-base font-medium text-gray-900 hover:underline dark:text-white">PC
-                                        system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24" Retina 4.5K, 8GB, SSD
-                                        256GB, 10-core GPU, Keyboard layout INT</a>
+                                        class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{ $item->nama }}</a>
 
                                     <div class="flex items-center gap-4">
                                         <button type="button"
@@ -113,7 +116,7 @@
                                                     stroke-width="2"
                                                     d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                             </svg>
-                                            Add to Favorites
+                                            Tambah ke favorit
                                         </button>
 
                                         <button type="button"
@@ -125,308 +128,7 @@
                                                     stroke-linejoin="round" stroke-width="2"
                                                     d="M6 18 17.94 6M18 18 6.06 6" />
                                             </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-                            <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                                <a href="#" class="shrink-0 md:order-1">
-                                    <img class="h-20 w-20 dark:hidden"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-light.svg"
-                                        alt="imac image" />
-                                    <img class="hidden h-20 w-20 dark:block"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-dark.svg"
-                                        alt="imac image" />
-                                </a>
-
-                                <label for="counter-input" class="sr-only">Choose quantity:</label>
-                                <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                    <div class="flex items-center">
-                                        <button type="button" id="decrement-button-2"
-                                            data-input-counter-decrement="counter-input-2"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="counter-input-2" data-input-counter
-                                            class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
-                                            placeholder="" value="1" required />
-                                        <button type="button" id="increment-button-2"
-                                            data-input-counter-increment="counter-input-2"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="text-end md:order-4 md:w-32">
-                                        <p class="text-base font-bold text-gray-900 dark:text-white">$598</p>
-                                    </div>
-                                </div>
-
-                                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#"
-                                        class="text-base font-medium text-gray-900 hover:underline dark:text-white">Restored
-                                        Apple Watch Series 8 (GPS) 41mm Midnight Aluminum Case with Midnight Sport Band</a>
-
-                                    <div class="flex items-center gap-4">
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                            </svg>
-                                            Add to Favorites
-                                        </button>
-
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18 17.94 6M18 18 6.06 6" />
-                                            </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-                            <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                                <a href="#" class="shrink-0 md:order-1">
-                                    <img class="h-20 w-20 dark:hidden"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook-pro-light.svg"
-                                        alt="imac image" />
-                                    <img class="hidden h-20 w-20 dark:block"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook-pro-dark.svg"
-                                        alt="imac image" />
-                                </a>
-
-                                <label for="counter-input" class="sr-only">Choose quantity:</label>
-                                <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                    <div class="flex items-center">
-                                        <button type="button" id="decrement-button-3"
-                                            data-input-counter-decrement="counter-input-3"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="counter-input-3" data-input-counter
-                                            class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
-                                            placeholder="" value="1" required />
-                                        <button type="button" id="increment-button-3"
-                                            data-input-counter-increment="counter-input-3"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="text-end md:order-4 md:w-32">
-                                        <p class="text-base font-bold text-gray-900 dark:text-white">$1,799</p>
-                                    </div>
-                                </div>
-
-                                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#"
-                                        class="text-base font-medium text-gray-900 hover:underline dark:text-white">Apple -
-                                        MacBook Pro 16" Laptop, M3 Pro chip, 36GB Memory, 18-core GPU, 512GB SSD, Space
-                                        Black</a>
-
-                                    <div class="flex items-center gap-4">
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                            </svg>
-                                            Add to Favorites
-                                        </button>
-
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18 17.94 6M18 18 6.06 6" />
-                                            </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-                            <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                                <a href="#" class="shrink-0 md:order-1">
-                                    <img class="h-20 w-20 dark:hidden"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-light.svg"
-                                        alt="imac image" />
-                                    <img class="hidden h-20 w-20 dark:block"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-dark.svg"
-                                        alt="imac image" />
-                                </a>
-
-                                <label for="counter-input" class="sr-only">Choose quantity:</label>
-                                <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                    <div class="flex items-center">
-                                        <button type="button" id="decrement-button-4"
-                                            data-input-counter-decrement="counter-input-4"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="counter-input-4" data-input-counter
-                                            class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
-                                            placeholder="" value="1" required />
-                                        <button type="button" id="increment-button-4"
-                                            data-input-counter-increment="counter-input-4"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="text-end md:order-4 md:w-32">
-                                        <p class="text-base font-bold text-gray-900 dark:text-white">$699</p>
-                                    </div>
-                                </div>
-
-                                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#"
-                                        class="text-base font-medium text-gray-900 hover:underline dark:text-white">Tablet
-                                        APPLE iPad Pro 12.9" 6th Gen, 128GB, Wi-Fi, Gold</a>
-
-                                    <div class="flex items-center gap-4">
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                            </svg>
-                                            Add to Favorites
-                                        </button>
-
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18 17.94 6M18 18 6.06 6" />
-                                            </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-                            <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                                <a href="#" class="w-20 shrink-0 md:order-1">
-                                    <img class="h-20 w-20 dark:hidden"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/iphone-light.svg"
-                                        alt="imac image" />
-                                    <img class="hidden h-20 w-20 dark:block"
-                                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/iphone-dark.svg"
-                                        alt="imac image" />
-                                </a>
-
-                                <label for="counter-input" class="sr-only">Choose quantity:</label>
-                                <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                    <div class="flex items-center">
-                                        <button type="button" id="decrement-button-5"
-                                            data-input-counter-decrement="counter-input-5"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="counter-input-5" data-input-counter
-                                            class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
-                                            placeholder="" value="3" required />
-                                        <button type="button" id="increment-button-5"
-                                            data-input-counter-increment="counter-input-5"
-                                            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                            <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="text-end md:order-4 md:w-32">
-                                        <p class="text-base font-bold text-gray-900 dark:text-white">$2,997</p>
-                                    </div>
-                                </div>
-
-                                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#"
-                                        class="text-base font-medium text-gray-900 hover:underline dark:text-white">APPLE
-                                        iPhone 15 5G phone, 256GB, Gold</a>
-
-                                    <div class="flex items-center gap-4">
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                            </svg>
-                                            Add to Favorites
-                                        </button>
-
-                                        <button type="button"
-                                            class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18 17.94 6M18 18 6.06 6" />
-                                            </svg>
-                                            Remove
+                                            Hapus
                                         </button>
                                     </div>
                                 </div>
@@ -439,35 +141,35 @@
                 <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
                     <div
                         class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                        <p class="text-xl font-semibold text-gray-900 dark:text-white">Order summary</p>
+                        <p class="text-xl font-semibold text-gray-900 dark:text-white">Ringkasan Pesanan</p>
 
                         <div class="space-y-4">
                             <div class="space-y-2">
                                 <dl class="flex items-center justify-between gap-4">
-                                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
-                                    <dd class="text-base font-medium text-gray-900 dark:text-white">$7,592.00</dd>
+                                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
+                                    <dd class="text-base font-medium text-gray-900 dark:text-white" data-summary-subtotal>Rp 0</dd>
                                 </dl>
 
-                                <dl class="flex items-center justify-between gap-4">
+                                {{-- <dl class="flex items-center justify-between gap-4">
                                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
                                     <dd class="text-base font-medium text-green-600">-$299.00</dd>
-                                </dl>
+                                </dl> --}}
 
-                                <dl class="flex items-center justify-between gap-4">
+                                {{-- <dl class="flex items-center justify-between gap-4">
                                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>
                                     <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>
-                                </dl>
+                                </dl> --}}
 
-                                <dl class="flex items-center justify-between gap-4">
+                                {{-- <dl class="flex items-center justify-between gap-4">
                                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
                                     <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
-                                </dl>
+                                </dl> --}}
                             </div>
 
                             <dl
                                 class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                                 <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                                <dd class="text-base font-bold text-gray-900 dark:text-white">$8,191.00</dd>
+                                <dd class="text-base font-bold text-gray-900 dark:text-white" data-summary-total>Rp 0</dd>
                             </dl>
                         </div>
 
@@ -492,4 +194,76 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('cart-product')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Helpers
+        const formatIDR = (num) => 'Rp ' + Number(num).toLocaleString('id-ID');
+        const parseVal = (val) => {
+            const n = parseInt(String(val).replace(/[^0-9-]/g, ''), 10);
+            return Number.isFinite(n) ? n : 1;
+        };
+        const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+
+        // Collect cart items
+        const items = Array.from(document.querySelectorAll('[data-cart-item]')).map((row) => {
+            const input = row.querySelector('input[data-input-counter]');
+            if (!input) return null;
+            const id = input.id;
+            const priceEl = row.querySelector('[data-price-el]');
+            const unit = parseFloat(priceEl?.dataset.unitPrice || '0') || 0;
+            const decBtns = row.querySelectorAll(`[data-input-counter-decrement="${id}"]`);
+            const incBtns = row.querySelectorAll(`[data-input-counter-increment="${id}"]`);
+            const min = parseInt(input.getAttribute('min')) || parseInt(input.dataset.min) || 1;
+            const max = parseInt(input.getAttribute('max')) || parseInt(input.dataset.max) || Number.POSITIVE_INFINITY;
+            const step = parseInt(input.getAttribute('step')) || parseInt(input.dataset.step) || 1;
+            return { row, input, priceEl, unit, decBtns, incBtns, min, max, step };
+        }).filter(Boolean);
+
+        // Summary targets
+        const summarySubtotalEl = document.querySelector('[data-summary-subtotal]');
+        const summaryTotalEl = document.querySelector('[data-summary-total]');
+
+        const updateLinePrice = (item, qty) => {
+            if (!item.priceEl) return;
+            item.priceEl.textContent = formatIDR(item.unit * qty);
+        };
+
+        const computeSubtotal = () => items.reduce((sum, it) => {
+            const qty = clamp(parseVal(it.input.value), it.min, it.max);
+            return sum + (it.unit * qty);
+        }, 0);
+
+        const renderSummary = () => {
+            const subtotal = computeSubtotal();
+            if (summarySubtotalEl) summarySubtotalEl.textContent = formatIDR(subtotal);
+            if (summaryTotalEl) summaryTotalEl.textContent = formatIDR(subtotal);
+        };
+
+        const setQty = (item, val) => {
+            const next = clamp(parseVal(val), item.min, item.max);
+            item.input.value = String(next);
+            updateLinePrice(item, next);
+            item.input.dispatchEvent(new Event('change', { bubbles: true }));
+            renderSummary();
+        };
+
+        // Bind events
+        items.forEach((it) => {
+            it.decBtns.forEach((btn) => btn.addEventListener('click', () => setQty(it, parseVal(it.input.value) - it.step)));
+            it.incBtns.forEach((btn) => btn.addEventListener('click', () => setQty(it, parseVal(it.input.value) + it.step)));
+            it.input.addEventListener('input', () => setQty(it, it.input.value));
+            it.input.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowUp') { e.preventDefault(); setQty(it, parseVal(it.input.value) + it.step); }
+                else if (e.key === 'ArrowDown') { e.preventDefault(); setQty(it, parseVal(it.input.value) - it.step); }
+            });
+        });
+
+        // Initial render
+        items.forEach((it) => setQty(it, it.input.value));
+        renderSummary();
+    });
+</script>
 @endsection
