@@ -28,16 +28,16 @@
 
             <!-- Qty Counter -->
             <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2">
-                <button class="px-2 text-xl text-gray-600 font-bold" onclick="updateQty(-1)">−</button>
-                <span id="qty" class="px-3 text-lg text-black">1</span>
-                <button class="px-2 text-xl text-gray-600 font-bold" onclick="updateQty(1)">+</button>
+                <button wire:click="decrementQuantity" class="px-2 text-xl text-gray-600 font-bold">−</button>
+                <span class="px-3 text-lg text-black">{{ $quantity }}</span>
+                <button wire:click="incrementQuantity" class="px-2 text-xl text-gray-600 font-bold">+</button>
             </div>
 
             <!-- Harga -->
             <div class="flex flex-col text-right leading-tight">
                 <span class="text-xs text-gray-700">Total Harga</span>
-                <span id="totalHarga" class="text-lg sm:text-xl font-semibold text-fuchsia-900">
-                    Rp{{ number_format($item->harga, 0 , ',', '.') }}
+                <span class="text-lg sm:text-xl font-semibold text-fuchsia-900">
+                    Rp{{ number_format($this->totalPrice, 0 , ',', '.') }}
                 </span>
             </div>
         </div>
@@ -46,14 +46,14 @@
         <div class="flex items-center justify-end gap-3 shrink-0">
 
             <!-- Beli Sekarang -->
-            <a href="#"
+            <button wire:click="buyNow"
                class="flex-1 text-center sm:flex-none py-2 px-4 border-2 border-[#7D1972] text-[#7D1972] 
                       rounded-2xl font-medium hover:bg-[#F7F0F6] hover:text-[#5B1154] hover:border-[#5B1154]">
                 Beli Sekarang
-            </a>
+            </button>
 
             <!-- Tambah ke Cart -->
-            <button wire:click="addToCart({{ $item->slug }})" 
+            <button wire:click="addToCart" 
                class="flex-1 text-center sm:flex-none py-2 px-4 border-2 border-[#7D1972] 
                       text-white bg-[#7D1972] rounded-2xl font-medium 
                       hover:bg-[#9E1E93] hover:border-[#9E1E93]">
@@ -73,18 +73,3 @@
         </div>
     </div>
 </div>
-
-@section('checkout-product')
-<script>
-    let qty = 1;
-    const harga = {{ $item->harga }};
-    function updateQty(val) {
-        qty += val;
-        if (qty < 1) qty = 1;
-
-        document.getElementById('qty').innerText = qty;
-        document.getElementById('totalHarga').innerText =
-            'Rp' + (qty * harga).toLocaleString('id-ID');
-    }
-</script>
-@endsection

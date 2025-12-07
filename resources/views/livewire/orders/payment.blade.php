@@ -1,16 +1,4 @@
-@extends('user.layouts.orders')
-
-@section('title')
-    <title>Payment - Bamart</title>
-@endsection
-
-@section('content')
-    @livewire('orders.payment')
-@endsection
-
-{{-- OLD STATIC CONTENT BELOW - NOT USED ANYMORE --}}
-@section('old-content')
-    <section class="bg-white py-6 antialiased dark:bg-gray-900">
+<section class="bg-white py-6 antialiased dark:bg-gray-900">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
 
         <!-- BREADCRUMB -->
@@ -55,21 +43,61 @@
             <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
 
                 <!-- LEFT FORM -->
-                <form action="/order/confirmation" class="w-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
+                <form wire:submit.prevent="processPayment" class="w-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
 
                     <!-- FORM GRID -->
                     <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         <!-- Full Name -->
-                        <div>
+                        <div class="sm:col-span-2">
                             <label for="full_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                                Full name (as displayed on card)*
+                                Nama Lengkap*
                             </label>
-                            <input type="text" id="full_name"
+                            <input type="text" id="full_name" wire:model="fullName"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
                                 focus:border-[#7D1972] focus:ring-[#7D1972]
                                 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                placeholder="Bonnie Green" required />
+                                placeholder="Nama lengkap Anda" required />
+                            @error('fullName') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                Email*
+                            </label>
+                            <input type="email" id="email" wire:model="email"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+                                focus:border-[#7D1972] focus:ring-[#7D1972]
+                                dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                placeholder="nama@email.com" required />
+                            @error('email') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Telepon -->
+                        <div>
+                            <label for="telepon" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                Nomor Telepon*
+                            </label>
+                            <input type="tel" id="telepon" wire:model="telepon"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+                                focus:border-[#7D1972] focus:ring-[#7D1972]
+                                dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                placeholder="08123456789" required />
+                            @error('telepon') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+                        </div>
+
+                        <!-- Alamat Pengiriman -->
+                        <div class="sm:col-span-2">
+                            <label for="alamat_pengiriman" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                Alamat Pengiriman*
+                            </label>
+                            <textarea id="alamat_pengiriman" wire:model="alamat_pengiriman" rows="3"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+                                focus:border-[#7D1972] focus:ring-[#7D1972]
+                                dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                placeholder="Jalan, Nomor Rumah, RT/RW, Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos" required></textarea>
+                            @error('alamat_pengiriman') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Card Number -->
@@ -77,11 +105,12 @@
                             <label for="card-number-input" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                 Card number*
                             </label>
-                            <input type="text" id="card-number-input"
+                            <input type="text" id="card-number-input" wire:model="cardNumber"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
                                 focus:border-[#7D1972] focus:ring-[#7D1972]
                                 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                                 placeholder="xxxx-xxxx-xxxx-xxxx" required />
+                            @error('cardNumber') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Card Expiration -->
@@ -100,12 +129,13 @@
                                     </svg>
                                 </span>
 
-                                <input type="month" id="card-expiration-input"
+                                <input type="month" id="card-expiration-input" wire:model="cardExpiration"
                                     class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 
                                     focus:border-[#7D1972] focus:ring-[#7D1972]
                                     dark:border-gray-600 dark:bg-gray-700 dark:text-white" 
                                     required />
                             </div>
+                            @error('cardExpiration') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- CVV -->
@@ -114,21 +144,30 @@
                                 CVV*
                             </label>
 
-                            <input type="number" id="cvv-input"
+                            <input type="number" id="cvv-input" wire:model="cvv"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
                                 focus:border-[#7D1972] focus:ring-[#7D1972]
                                 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                                 placeholder="•••" required />
+                            @error('cvv') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                         </div>
 
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit"
+                    <button type="submit" wire:loading.attr="disabled"
                         class="w-full rounded-lg bg-[#7D1972] px-5 py-3 text-sm font-medium text-white 
                         hover:bg-[#9E1E93] focus:outline-none focus:ring-4 focus:ring-[#7D1972]/30 
-                        dark:bg-[#7D1972] dark:hover:bg-[#9E1E93] dark:focus:ring-[#7D1972]/30">
-                        Pay now
+                        dark:bg-[#7D1972] dark:hover:bg-[#9E1E93] dark:focus:ring-[#7D1972]/30
+                        disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span wire:loading.remove wire:target="processPayment">Pay now</span>
+                        <span wire:loading wire:target="processPayment">
+                            <svg class="animate-spin inline h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Processing...
+                        </span>
                     </button>
                 </form>
 
@@ -138,11 +177,11 @@
 
                         <div class="space-y-2">
                             <dl class="flex items-center justify-between gap-4">
-                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">$6,592.00</dd>
+                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">Rp {{ number_format($order->total_price ?? 0, 0, ',', '.') }}</dd>
                             </dl>
 
-                            <dl class="flex items-center justify-between gap-4">
+                            {{-- <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
                                 <dd class="text-base font-medium text-green-500">-$299.00</dd>
                             </dl>
@@ -155,12 +194,12 @@
                             <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
                                 <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
-                            </dl>
+                            </dl> --}}
                         </div>
 
                         <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                             <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                            <dd class="text-base font-bold text-gray-900 dark:text-white">$7,191.00</dd>
+                            <dd class="text-base font-bold text-gray-900 dark:text-white">Rp {{ number_format($order->total_price ?? 0, 0, ',', '.') }}</dd>
                         </dl>
                     </div>
 
@@ -188,4 +227,3 @@
         </div>
     </div>
 </section>
-@endsection

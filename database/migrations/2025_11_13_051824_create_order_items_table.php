@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id('order_item_id');
-            $table->foreignId('order_id');
-            $table->foreignId('item_id');
-            $table->smallInteger('quantity');
-            $table->decimal('subtotal', 10,2);
+            $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
+            $table->foreignId('item_id')->constrained('items', 'item_id')->onDelete('restrict');
+            $table->integer('quantity')->unsigned();
+            $table->decimal('unit_harga', 15, 2);
+            $table->decimal('subtotal', 15, 2);
             $table->timestamps();
+            
+            // Index untuk performa query
+            $table->index(['order_id', 'item_id']);
         });
     }
 

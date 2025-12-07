@@ -46,7 +46,7 @@
                     @foreach ($cart['items'] as $item)
                         <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
                             <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0" data-cart-item>
-                                <a href="#" class="shrink-0 md:order-1">
+                                <a href="{{ route('items.show', $item->slug) }}" class="shrink-0 md:order-1">
                                 @if (!$item->img_url)
                                     <img class="h-20 w-20 dark:hidden"
                                         src="{{ asset('img/background/missing-image.jpg') }}"
@@ -94,7 +94,7 @@
                                 </div>
 
                                 <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#"
+                                    <a href="{{ route('items.show', $item->slug) }}"
                                         class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{ $item->nama }}</a>
 
                                     <div class="flex items-center gap-4">
@@ -164,15 +164,23 @@
                         </dl>
                     </div>
 
-                    <a href="/order/checkout"
-                        class="flex w-full items-center justify-center rounded-lg bg-[#7D1972] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#7D1972] focus:outline-none focus:ring-4 focus:ring-[#7D1972]/30 dark:bg-[#7D1972] dark:hover:bg-[#7D1972] dark:focus:ring-[#7D1972]/30 hover:bg-[#9E1E93]">Proceed
-                        to Checkout</a>
+                    <button wire:click="checkout" wire:loading.attr="disabled"
+                        class="flex w-full items-center justify-center rounded-lg bg-[#7D1972] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#9E1E93] focus:outline-none focus:ring-4 focus:ring-[#7D1972]/30 dark:bg-[#7D1972] dark:hover:bg-[#9E1E93] dark:focus:ring-[#7D1972]/30 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span wire:loading.remove wire:target="checkout">Buat Pesanan</span>
+                        <span wire:loading wire:target="checkout">
+                            <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Memproses...
+                        </span>
+                    </button>
 
                     <div class="flex items-center justify-center gap-2">
-                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
-                        <a href="/" title=""
+                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> atau </span>
+                        <a href="{{ route('home-page') }}" title=""
                             class="inline-flex items-center gap-2 text-sm font-medium text-[#7D1972] underline hover:no-underline dark:text-[#7D1972]">
-                            Continue Shopping
+                            Lanjut Belanja
                             <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

@@ -3,7 +3,9 @@
 namespace App\Livewire\Orders;
 
 use App\Facades\Cart as FacadesCart;
+use App\Services\OrderService;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Cart extends Component
 {
@@ -61,5 +63,49 @@ class Cart extends Component
         $this->calculateTotals();
         $this->dispatch('cart-updated');
         session()->flash('success', 'Item dihapus dari keranjang');
+    }
+
+    public function checkout()
+    {
+        // Check if cart is empty
+        if (empty($this->cart['items'])) {
+            session()->flash('error', 'Keranjang belanja kosong');
+            return;
+        }
+
+        \Log::info('Checkout started', ['cart_items_count' => count($this->cart['items'])]);
+
+        try {
+            $orderService = new OrderService();
+            // Pass user_id (null if guest)
+            $userId = Auth::check() ? Auth::id() : null;
+            
+            \Log::info('Creating order', ['user_id' => $userId]);
+            
+            $order = $orderService->createOrderFromCart($userId);
+            
+            \Log::info('Order created successfully', [
+                'order_id' => $order->order_id,
+                'total_price' => $order->total_price,
+                'status' => $order->status
+            ]);
+            
+            // Store order_id in session for payment process
+            session()->put('pending_order_id', $order->order_id);
+            session()->save(); // Force save session
+            
+            \Log::info('Session saved', ['pending_order_id' => session('pending_order_id')]);
+            
+            // Dispatch event to update cart counter
+            $this->dispatch('cart-updated');
+            
+            // Redirect to payment page
+            \Log::info('Redirecting to payment page');
+            return $this->redirectRoute('order.payment');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Gagal membuat order: ' . $e->getMessage());
+            \Log::error('Checkout Error: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+        }
     }
 }

@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
-            $table->foreignId('user_id');
-            $table->date('tanggal_order');
-            $table->decimal('harga');
-            $table->enum('status', ['tertunda', 'dibayar',
-                                    'dikirm', 'selesai', 
-                                    'dibatalkan']);
+            $table->foreignId('user_id')->nullable();
+            $table->decimal('total_price', 15, 2)->default(0);
+            $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }

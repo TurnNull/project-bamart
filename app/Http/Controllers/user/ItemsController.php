@@ -8,12 +8,12 @@ use App\Http\Controllers\Controller;
 
 class ItemsController extends Controller
 {
-    // public function show(Items $item)
-    // {   
-    //     return view('user.pages.items.index', [
-    //         'item' => $item
-    //     ]);
-    // }
+    public function show(Items $item)
+    {   
+        return view('user.pages.items.index', [
+            'item' => $item
+        ]);
+    }
 
     // public function cart(Items $item)
     // {   

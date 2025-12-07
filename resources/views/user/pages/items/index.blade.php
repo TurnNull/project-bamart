@@ -125,4 +125,4 @@
 </div>
 @endsection
 
-@include('user.components.checkoutbar')
+@livewire('components.checkoutbar', ['slug' => $item->slug])

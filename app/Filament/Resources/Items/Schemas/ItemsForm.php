@@ -49,10 +49,9 @@ class ItemsForm
                     ->image()
                     ->maxSize(3072)
                     ->imageEditor()
-                    // ->directory("")
-                    ->before(function (Items $items) {
-                        if ($items->img_url) {
-                            Storage::disk('public')->delete($items->img_url);
+                    ->deleteUploadedFileUsing(function ($file) {
+                        if ($file) {
+                            Storage::disk('public')->delete($file);
                         }
                     }),
             ]);

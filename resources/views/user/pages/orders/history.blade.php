@@ -1,10 +1,9 @@
 @extends('user.layouts.orders')
 
-
 @section('title')
-    <title>Order Confirmation - Bamart</title>
+    <title>Riwayat Pesanan - Bamart</title>
 @endsection
 
 @section('content')
-    @livewire('orders.confirmation')
+    @livewire('orders.history')
 @endsection

@@ -20,7 +20,7 @@
         </div>
     
         <!-- Title -->
-        <a href="#">
+        <a href="{{ route('items.show', $item->slug) }}">
             <h3 class="mt-3 text-base font-semibold text-gray-900 line-clamp-2">
                 {{ $item->nama }}
             </h3>
